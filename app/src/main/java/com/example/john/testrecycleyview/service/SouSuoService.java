@@ -21,7 +21,7 @@ public interface SouSuoService {
 
    /*type :  recommand , rslist+quary(q)*/
    @GET("/v3/app/android/phone/search/{type}")
-   Call<SouSuoResultEntity> getRecommandList(@Path("type") String name, @Query("inputSearch") String input, @Query("page")int page);
+   Call<SouSuoResultEntity> getRecommandList(@Path("type") String type, @Query("inputSearch") String inputSearch, @Query("page")int page);
 
 
 

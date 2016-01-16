@@ -1,11 +1,15 @@
 package com.example.john.testrecycleyview.adapter;
 
 import android.content.Context;
+import android.graphics.Point;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.john.testrecycleyview.R;
@@ -40,11 +44,23 @@ public class SearchResultAdapter  extends RecyclerView.Adapter<SearchResultAdapt
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         SouSuoResultEntity.DataEntity.ReturnDataEntity.ComicListEntity data = mList.get(position);
+
         holder.cover.setImageURI(Uri.parse(data.getCover()));
+        WindowManager window = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+        Display display = window.getDefaultDisplay();
+        Point point = new Point();
+        display.getSize(point);
+        int width = point.x;
+        int height= point.y;
+        float ratio = height/width;
+        holder.cover.setAspectRatio(ratio);
+
         holder.title.setText(data.getName());
         holder.nickName.setText(data.getNickname());
         holder.clickTotal.setText(data.getClick_total());
         holder.type.setText(data.getTags().get(0));
+        holder.description.setText(data.getDescription());
+
     }
 
     @Override
